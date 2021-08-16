@@ -22,7 +22,7 @@ resource "aws_ami_copy" "copy_encrypt_source_ami" {
   name              = "${local.name}-copy"
   source_ami_id     = aws_ami_from_instance.source_ami.id
   source_ami_region = var.region
-  encrypted         = var.ami_copy_encrypt_option # true
+  encrypted         = var.ami_copy_encrypt_option
   kms_key_id        = aws_kms_key.source_kms_key.arn
 }
 
