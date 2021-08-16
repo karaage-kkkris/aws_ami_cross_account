@@ -1,5 +1,4 @@
 #!/bin/bash
-# Function: Configure EC2 with software required to support integration testing
 
 echo "===== Initial Update ====="
 sudo apt-get update
