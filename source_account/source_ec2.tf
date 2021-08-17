@@ -1,3 +1,7 @@
+data "template_file" "user_data" {
+  template = file("${path.module}/setup_ec2.sh")
+}
+
 resource "aws_instance" "ec2" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.ec2_instance_type
@@ -7,7 +11,7 @@ resource "aws_instance" "ec2" {
   vpc_security_group_ids = [aws_security_group.ec2.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2.name
 
-  user_data = file("${path.module}/setup_ec2.sh")
+  user_data = data.template_file.user_data.rendered
 
   lifecycle {
     ignore_changes = [ami]
