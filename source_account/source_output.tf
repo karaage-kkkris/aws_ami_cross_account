@@ -5,3 +5,7 @@ output "source_ami" {
 output "source_snapshot_id" {
   value = lookup(local.block_device_mappings["/dev/sda1"].ebs, "snapshot_id", "what?")
 }
+
+output "ec2_id" {
+  value = aws_instance.ec2.id
+}
