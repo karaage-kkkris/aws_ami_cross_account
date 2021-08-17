@@ -8,7 +8,7 @@ resource "null_resource" "terminate_ec2" {
   }
 
   provisioner "local-exec" {
-    command = templatefile("${path.module}/terminate_ec2.tpl", {
+    command = templatefile("${path.module}/terminate_ec2.sh", {
       region      = var.region
       instance_id = aws_instance.ec2.id
     })
