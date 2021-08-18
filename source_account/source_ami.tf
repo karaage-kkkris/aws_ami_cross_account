@@ -11,6 +11,14 @@ resource "aws_ami_from_instance" "source_ami" {
   source_instance_id = var.ec2_id
 }
 
+resource "null_resource" "stop_ec2" {
+  depends_on = [aws_ami_from_instance.source_ami]
+
+  provisioner "local-exec" {
+    command = "aws ec2 stop-instances --region ${var.region} --instance-ids ${var.ec2_id}"
+  }
+}
+
 resource "aws_ami_copy" "copy_encrypt_source_ami" {
   depends_on = [
     aws_ami_from_instance.source_ami
