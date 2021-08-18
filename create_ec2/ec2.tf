@@ -50,13 +50,13 @@ resource "tls_private_key" "generated_key" {
 
 # Create keypair in AWS using generated SSH key
 resource "aws_key_pair" "ec2" {
-  key_name   = "${local.name}-03"
+  key_name   = local.name
   public_key = tls_private_key.generated_key.public_key_openssh
 }
 
 # Store SSH key in Secret Manager
 resource "aws_secretsmanager_secret" "ec2" {
-  name                    = "${local.name}-03"
+  name                    = local.name
   description             = "EC2 Keypair for ${local.name}"
   recovery_window_in_days = 0
 }
