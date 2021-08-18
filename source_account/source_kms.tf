@@ -17,6 +17,7 @@ data "aws_iam_policy_document" "source_kms_key" {
       identifiers = ["arn:aws:iam::${var.target_account_id}:root"]
     }
     actions = [
+      "kms:ReEncrypt*",
       "kms:CreateGrant",
       "kms:Encrypt",
       "kms:Decrypt",

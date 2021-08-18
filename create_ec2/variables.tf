@@ -46,27 +46,8 @@ variable "source_component_name" {
 }
 
 # EC2
-variable "ec2_id" {
-  description = "ID of EC2 instance"
+variable "ec2_instance_type" {
+  description = "EC2 instance type"
+  default     = "t3a.small"
   type        = string
-}
-
-# KMS
-variable "kms_recovery_window_in_days" {
-  description = "Number of days before completely deleting a KMS."
-  default     = 7
-  type        = number
-}
-
-# AMI
-variable "ami_copy_encrypt_option" {
-  description = "Specifies whether the destination snapshots of the copied image should be encrypted."
-  default     = true
-  type        = bool
-}
-
-variable "ami_filter_most_recent_option" {
-  description = "If more than one result is returned, use the most recent AMI."
-  default     = true
-  type        = bool
 }

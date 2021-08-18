@@ -1,7 +1,3 @@
-data "template_file" "user_data" {
-  template = file("${path.module}/setup_ec2.sh")
-}
-
 resource "aws_instance" "ec2" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.ec2_instance_type
@@ -11,7 +7,7 @@ resource "aws_instance" "ec2" {
   vpc_security_group_ids = [aws_security_group.ec2.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2.name
 
-  user_data = data.template_file.user_data.rendered
+  user_data = file("${path.module}/setup_ec2.sh")
 
   lifecycle {
     ignore_changes = [ami]
@@ -54,13 +50,13 @@ resource "tls_private_key" "generated_key" {
 
 # Create keypair in AWS using generated SSH key
 resource "aws_key_pair" "ec2" {
-  key_name   = local.name
+  key_name   = "${local.name}-03"
   public_key = tls_private_key.generated_key.public_key_openssh
 }
 
 # Store SSH key in Secret Manager
 resource "aws_secretsmanager_secret" "ec2" {
-  name                    = local.name
+  name                    = "${local.name}-03"
   description             = "EC2 Keypair for ${local.name}"
   recovery_window_in_days = 0
 }

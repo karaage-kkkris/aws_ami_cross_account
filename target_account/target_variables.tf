@@ -52,34 +52,7 @@ variable "ec2_instance_type" {
   default     = "t3a.small"
 }
 
-# KMS
-variable "kms_recovery_window_in_days" {
-  description = "Number of days before completely deleting a KMS."
-  type        = number
-  default     = 7
-}
-
-# AMI
-variable "ami_copy_encrypt_option" {
-  description = "Specifies whether the destination snapshots of the copied image should be encrypted."
-  type        = bool
-  default     = true
-}
-
-variable "ami_filter_most_recent_option" {
-  description = "If more than one result is returned, use the most recent AMI."
-  type        = bool
-  default     = true
-}
-
-variable "ena_support" {
-  description = "Specifies whether enhanced networking with ENA is enabled."
-  type        = bool
-  default     = true
-}
-
-# Snapshot
-variable "snapshot_id" {
-  description = "The Snapshot ID shared by the source account."
+variable "ami_id" {
+  description = "ID of the custom AMI"
   type        = string
 }

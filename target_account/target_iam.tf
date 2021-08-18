@@ -37,34 +37,14 @@ data "aws_iam_policy_document" "target_policy" {
   }
 
   statement {
-    resources = ["*"]
-    actions = [
-      "kms:ListKeys",
-      "kms:ListAliases",
-    ]
-  }
-
-  statement {
     resources = [
       "arn:aws:kms:${var.region}:${var.source_account_id}:key/*"
     ]
     actions = [
       "kms:DescribeKey",
+      "kms:ReEncrypt*",
       "kms:CreateGrant",
-      "kms:Decrypt",
-    ]
-  }
-
-  statement {
-    resources = [
-      "arn:aws:kms:${var.region}:${var.target_account_id}:key/*"
-    ]
-    actions = [
-      "kms:CreateGrant",
-      "kms:Encrypt",
-      "kms:Decrypt",
-      "kms:DescribeKey",
-      "kms:GenerateDataKeyWithoutPlaintext"
+      "kms:Decrypt"
     ]
   }
 }

@@ -5,13 +5,10 @@ locals {
   }
 }
 
-resource "aws_ami_from_instance" "source_ami" {
-  depends_on = [
-    aws_instance.ec2
-  ]
 
+resource "aws_ami_from_instance" "source_ami" {
   name               = local.name
-  source_instance_id = aws_instance.ec2.id
+  source_instance_id = var.ec2_id
 }
 
 resource "aws_ami_copy" "copy_encrypt_source_ami" {
@@ -24,6 +21,12 @@ resource "aws_ami_copy" "copy_encrypt_source_ami" {
   source_ami_region = var.region
   encrypted         = var.ami_copy_encrypt_option
   kms_key_id        = aws_kms_key.source_kms_key.arn
+}
+
+
+resource "aws_ami_launch_permission" "add_target_permission" {
+  image_id   = aws_ami_copy.copy_encrypt_source_ami.id
+  account_id = var.target_account_id
 }
 
 data "aws_ami" "copied_ami" {

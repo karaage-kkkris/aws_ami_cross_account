@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set +e
+
 echo "===== Initial Update ====="
 sudo apt-get update
 

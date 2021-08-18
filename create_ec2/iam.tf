@@ -21,9 +21,7 @@ resource "aws_iam_role" "source_iam_role" {
   assume_role_policy   = data.aws_iam_policy_document.ec2.json
 }
 
-# Define IAM policy document and policy to be attached to the testing role
 data "aws_iam_policy_document" "source_iam_policy" {
-  # This provides access to all the resources which must be tested
   statement {
     resources = ["*"]
     actions = [
