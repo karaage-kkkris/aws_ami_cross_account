@@ -24,8 +24,11 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   gnupg-agent \
   software-properties-common \
   python3-pip
+# Pin at version 1.4.4-1 since there is a known issue in version 1.4.6-1
+# LinkL: containerd/containerd#5547
+sudo apt-get install containerd.io=1.4.4-1
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  docker-ce docker-ce-cli containerd.io
+  docker-ce docker-ce-cli
 
 echo "===== Installing awscli ====="
 sudo pip3 install awscli
