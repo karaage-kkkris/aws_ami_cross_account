@@ -1,0 +1,11 @@
+{
+    "package_name": "qe-ubuntu-18.04-image-20210819",
+    "build_region": "eu-west-1",
+    "instance_type": "t3a.small",
+    "subnet_id": "",
+    "vpc_id": "",
+    "owner": "",
+    "kms_key_id": "",
+    "authorized_accounts": "",
+    "packer_iam_role": ""
+}
